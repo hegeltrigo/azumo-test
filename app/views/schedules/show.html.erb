@@ -2,12 +2,12 @@
 
 <p>
   <strong>Starts at:</strong>
-  <%= @schedule.starts_at %>
+  <%= @schedule.starts_at.strftime('%B %d, %Y') %>
 </p>
 
 <p>
   <strong>Ends at:</strong>
-  <%= @schedule.ends_at %>
+  <%= @schedule.ends_at.strftime('%B %d, %Y') %>
 </p>
 
 <%= link_to 'Edit', edit_schedule_path(@schedule) %> |
