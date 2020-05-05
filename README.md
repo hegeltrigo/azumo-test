@@ -1,24 +1,34 @@
-# README
+# Project Title
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Azumo Test.
 
-Things you may want to cover:
+## Getting Started
 
-* Ruby version
+### Dependencies
 
-* System dependencies
+* Postgresql
+* Yarn or npm
+* rvm or rbenv
+* ruby 2.6.5
 
-* Configuration
 
-* Database creation
+### Installing
 
-* Database initialization
+* $ yarn install
+* $ rails db:drop db:create db:migrate
 
-* How to run the test suite
+## Test
 
-* Services (job queues, cache servers, search engines, etc.)
+* $ rspec
 
-* Deployment instructions
+### Executing program
 
-* ...
+* $ rails s
+
+## Authors
+
+contact info
+
+ex. Hegel  Trigo  
+ex. [@hegeltron](https://www.linkedin.com/in/hegeltrigo)
+
