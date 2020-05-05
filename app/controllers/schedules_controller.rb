@@ -24,13 +24,8 @@ class SchedulesController < ApplicationController
   # POST /schedules
   # POST /schedules.json
   def create
-    # custom_params = schedule_params
-    
-    # custom_params = Schedule.custom_params(custom_params)
-
     @schedule = Schedule.new(schedule_params)
 
-    debugger 
     respond_to do |format|
       if @schedule.save
         format.html { redirect_to @schedule, notice: 'Schedule was successfully created.' }
