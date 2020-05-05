@@ -22,3 +22,75 @@ import '../stylesheets/application'
 import "cocoon";
 
 
+// $(document).on('click',".input-group-append", function(){
+//   var input = $(this).prev();
+
+//   var id = input.attr('id');
+
+//     if (id) {
+//       input
+//         .attr('data-target', '#' + id);
+//     }
+
+//     input.next().attr('data-target', '#' + id);
+
+//     input.datetimepicker({
+//       format: 'MMMM D, YYYY h:mm A',
+//       stepping: 15,
+//       minDate: $("#datetimepicker2").find("input").val(),
+//       maxDate: $("#datetimepicker3").find("input").val(),
+//       useCurrent: false,
+//       sideBySide: true,
+//       icons: {
+//         up: 'fas fa-arrow-up',
+//         down: 'fas fa-arrow-down',
+//         previous: 'fas fa-chevron-left',
+//         next: 'fas fa-chevron-right',
+//         clear: 'fas fa-trash',
+//         close: 'fas fa-times'
+//       },
+//       buttons: {
+//         showClear: true,      
+//         showClose: true,
+//       }
+//     });
+// });
+
+$("*").on('cocoon:after-insert', function () { 
+  $(".nested-fields .input-group-append").click(function() {
+       
+  var input = $(this).prev();
+
+  var id = input.attr('id');
+
+    if (id) {
+      input
+        .attr('data-target', '#' + id);
+    }
+
+    input.next().attr('data-target', '#' + id);
+
+    input.datetimepicker({
+      format: 'MMMM D, YYYY h:mm A',
+      stepping: 15,
+      minDate: $("#datetimepicker2").find("input").val(),
+      maxDate: $("#datetimepicker3").find("input").val(),
+      useCurrent: false,
+      sideBySide: true,
+      icons: {
+        up: 'fas fa-arrow-up',
+        down: 'fas fa-arrow-down',
+        previous: 'fas fa-chevron-left',
+        next: 'fas fa-chevron-right',
+        clear: 'fas fa-trash',
+        close: 'fas fa-times'
+      },
+      buttons: {
+        showClear: true,      
+        showClose: true,
+      }
+    });
+
+  });
+
+});

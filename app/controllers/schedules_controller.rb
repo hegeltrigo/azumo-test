@@ -24,11 +24,11 @@ class SchedulesController < ApplicationController
   # POST /schedules
   # POST /schedules.json
   def create
-    custom_params = schedule_params
+    # custom_params = schedule_params
     
-    custom_params = Schedule.custom_params(custom_params)
+    # custom_params = Schedule.custom_params(custom_params)
 
-    @schedule = Schedule.new(custom_params)
+    @schedule = Schedule.new(schedule_params)
 
     debugger 
     respond_to do |format|
@@ -46,10 +46,10 @@ class SchedulesController < ApplicationController
   # PATCH/PUT /schedules/1.json
   def update
     respond_to do |format|
-      custom_params = schedule_params
-      custom_params = Schedule.custom_params(custom_params)
+      # custom_params = schedule_params
+      # custom_params = Schedule.custom_params(custom_params)
 
-      if @schedule.update(custom_params)
+      if @schedule.update(schedule_params)
         format.html { redirect_to @schedule, notice: 'Schedule was successfully updated.' }
         format.json { render :show, status: :ok, location: @schedule }
       else

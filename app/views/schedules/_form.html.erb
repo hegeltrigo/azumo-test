@@ -15,13 +15,24 @@
   <div class="container">
     <div class="row">
         <div class="col-sm-6">
-
-          <input type="text" name="schedule[starts_at]" class="form-control datetimepicker-input" id="datetimepicker2" data-toggle="datetimepicker" data-target="#datetimepicker2"/>
+        
+          <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
+            <%= form.text_field(:starts_at, value: form.object.starts_at ? form.object.starts_at.strftime('%B %d, %Y') : nil, class: "form-control datetimepicker-input", data: {target:"#datetimepicker2"}) %>
+            <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
+              <div class="input-group-text"><span class="fas fa-calendar-alt"></span></div>
+            </div>
+          </div>
 
         </div>
 
         <div class="col-sm-6">
-          <input type="text" name="schedule[ends_at]" class="form-control datetimepicker-input" id="datetimepicker3" data-toggle="datetimepicker" data-target="#datetimepicker3"/>
+
+          <div class="input-group date" id="datetimepicker3" data-target-input="nearest">
+            <%= form.text_field(:ends_at, value: form.object.ends_at ? form.object.ends_at.strftime('%B %d, %Y') : nil, class: "form-control datetimepicker-input", data: {target:"#datetimepicker3"}) %>
+            <div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker">
+              <div class="input-group-text"><span class="fas fa-calendar-alt"></span></div>
+            </div>
+          </div>
 
         </div>
      
@@ -29,34 +40,92 @@
 </div>
 <br>
 <div id="schedule_days" class="DATA">
+  
   <%= form.fields_for :schedule_days do |schedule_day| %>
     <%= render 'schedule_day_fields', f: schedule_day %>
   <% end %>
-  <div class="links">
+
+  
+  
+  <div class="links container">
     <%= link_to_add_association 'add day', form, :schedule_days %>
   </div>
+  <br>
 </div>
 
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+<div class="actions container">
+  <%= form.submit nil, class: 'btn btn-success' %>
+</div>
 
 <% end %>
 
 <script type="text/javascript">
-    $(function () {
 
-        $('#datetimepicker2').datetimepicker({
-          format: 'L',
-          minDate: "<%= DateTime.now.strftime("%-m/%-d/%Y")%>",
-          defaultDate: "<%= @schedule.new_record? ? DateTime.now.strftime("%-m/%-d/%Y") : @schedule.starts_at.strftime("%-m/%-d/%Y") %>"
-        });
+   $('#datetimepicker2').datetimepicker({
+    format: 'MMMM D, YYYY',
+    minDate: Date(),
+    icons: {
+      up: 'fas fa-arrow-up',
+      down: 'fas fa-arrow-down',
+      previous: 'fas fa-chevron-left',
+      next: 'fas fa-chevron-right',
+      close: 'fas fa-times'
+    },
+    buttons: {showClose: true }
+  });
 
-         $('#datetimepicker3').datetimepicker({
-          format: 'L',
-          minDate: "<%= DateTime.now.strftime("%-m/%-d/%Y")%>",
-          defaultDate: "<%= @schedule.new_record? ? DateTime.now.strftime("%-m/%-d/%Y") : @schedule.ends_at.strftime("%-m/%-d/%Y") %>"
-        });
-    });
+  $('#datetimepicker3').datetimepicker({
+    format: 'MMMM D, YYYY',
+    minDate: Date(),
+
+    icons: {
+      up: 'fas fa-arrow-up',
+      down: 'fas fa-arrow-down',
+      previous: 'fas fa-chevron-left',
+      next: 'fas fa-chevron-right',
+      close: 'fas fa-times'
+    },
+    buttons: {showClose: true }
+  });
+
+
+  $('.DATA :input:not([type=hidden])').each(function(idx) {
+      var id = $(this).attr('id');
+
+
+      if (id) {
+        $(this)
+          .attr('data-target', '#' + id);
+      }
+
+      $(this).next().attr('data-target', '#' + id);
+
+      var date = $(this).val();
+
+
+      $(this).datetimepicker({
+        format: 'MMMM D, YYYY h:mm A',
+        date: date,
+        stepping: 15,
+        minDate: $("#datetimepicker2").find("input").val(),
+        maxDate: $("#datetimepicker3").find("input").val(),
+        useCurrent: false,
+        sideBySide: true,
+        icons: {
+          up: 'fas fa-arrow-up',
+          down: 'fas fa-arrow-down',
+          previous: 'fas fa-chevron-left',
+          next: 'fas fa-chevron-right',
+          clear: 'fas fa-trash',
+          close: 'fas fa-times'
+        },
+        buttons: {
+          showClear: true,      
+          showClose: true,
+        }
+      });
+
+    })        
+    
 </script>

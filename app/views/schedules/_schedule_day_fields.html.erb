@@ -1,42 +1,28 @@
 <div class="nested-fields">
   <div class="field">
-   
-
+  
     <div class="container">
       <div class="row">
-          <div class="col-sm-3">
 
-            <%= f.text_field :starts_at, class: "form-control datetimepicker-input" %>
+        <div class='col-md-3'>
+
+          <div class='form-group'>
+            <div class="input-group date" data-target-input="nearest">
+
+              <%= f.text_field(:starts_at, value: f.object.starts_at ? f.object.starts_at.strftime('%B %d, %Y %I:%M %p') : nil, class: "form-control datetimepicker-input") %>
+              <div class="input-group-append" data-toggle="datetimepicker">
+                <div class="input-group-text"><i class="fas fa-calendar-plus"></i></div>
+              </div>
+            </div>
           </div>
+          
+        </div>
+        <div class='col-md-3'>
+          <%= link_to_remove_association "remove day", f %>
+        </div>
       </div>
     </div>
-
   </div>
-  
-  <%= link_to_remove_association "remove day", f %>
-
-  <script type="text/javascript">
-
-    $(function() {
-      console.log($("#datetimepicker2").find("input").val())
-      $('.nested-fields input').each(function(idx) {
-        var id = $(this).attr('id');
-        if (id) {
-          $(this)
-            .attr('data-toggle', 'datetimepicker') // strangely, data() doesn't work here
-            .data('target', '#' + id);
-        }
-
-        $(this).datetimepicker({
-          format: 'L',
-          defaultDate: "<%= f.object.starts_at.strftime("%-m/%-d/%Y") if !f.object.new_record? %>"
-        
-        });
-
-      })
-    });
-
-    
-  </script>
+ 
 </div>
 
