@@ -1,0 +1,28 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: postgres
+  password: sheril
+
+development:
+  <<: *default
+  database: test_development
+
+test:
+  <<: *default
+  database: test_test
+
+staging:
+  <<: *default
+  database: test_staging
+  username: postgres
+  password: sheril
+
+
+production:
+  <<: *default
+  database: test_production
+  username: postgres
+  password: sheril
+

@@ -1,0 +1,62 @@
+<%= form_with(model: schedule, local: true) do |form| %>
+  <% if schedule.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(schedule.errors.count, "error") %> prohibited this schedule from being saved:</h2>
+
+      <ul>
+        <% schedule.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+
+          <input type="text" name="schedule[starts_at]" class="form-control datetimepicker-input" id="datetimepicker2" data-toggle="datetimepicker" data-target="#datetimepicker2"/>
+
+        </div>
+
+        <div class="col-sm-6">
+          <input type="text" name="schedule[ends_at]" class="form-control datetimepicker-input" id="datetimepicker3" data-toggle="datetimepicker" data-target="#datetimepicker3"/>
+
+        </div>
+     
+    </div>
+</div>
+<br>
+<div id="schedule_days" class="DATA">
+  <%= form.fields_for :schedule_days do |schedule_day| %>
+    <%= render 'schedule_day_fields', f: schedule_day %>
+  <% end %>
+  <div class="links">
+    <%= link_to_add_association 'add day', form, :schedule_days %>
+  </div>
+</div>
+
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+
+<% end %>
+
+<script type="text/javascript">
+    $(function () {
+
+        $('#datetimepicker2').datetimepicker({
+          format: 'L',
+          minDate: "<%= DateTime.now.strftime("%-m/%-d/%Y")%>",
+          defaultDate: "<%= @schedule.new_record? ? DateTime.now.strftime("%-m/%-d/%Y") : @schedule.starts_at.strftime("%-m/%-d/%Y") %>"
+        });
+
+         $('#datetimepicker3').datetimepicker({
+          format: 'L',
+          minDate: "<%= DateTime.now.strftime("%-m/%-d/%Y")%>",
+          defaultDate: "<%= @schedule.new_record? ? DateTime.now.strftime("%-m/%-d/%Y") : @schedule.ends_at.strftime("%-m/%-d/%Y") %>"
+        });
+    });
+</script>

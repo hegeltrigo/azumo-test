@@ -1,0 +1,28 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: postgres
+  password: yourpassword
+
+development:
+  <<: *default
+  database: globalwork_development
+
+test:
+  <<: *default
+  database: globalwork_test
+
+staging:
+  <<: *default
+  database: globalwork_staging
+  username: postgres
+  password: yourpassword
+
+
+production:
+  <<: *default
+  database: globalwork_production
+  username: postgres
+  password: yourpassword
+
