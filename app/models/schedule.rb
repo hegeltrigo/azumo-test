@@ -6,6 +6,11 @@ class Schedule < ApplicationRecord
 
   validates :starts_at, :ends_at, presence: true
   validate :date_validation
+
+
+  validates :starts_at, uniqueness: { scope: :ends_at }
+
+
   
   def date_validation
     if ends_at < starts_at
